@@ -29,11 +29,15 @@ Route::prefix("v1")->group(function () {
         Route::get("/all/{latitude}/{longitude}", "\\App\\Http\\Controllers\\GymController@all")->name("gym.all");
         Route::post("/store", "\\App\\Http\\Controllers\\GymController@store")->name("gym.store");
         Route::put("/update/{gymId}", "\\App\\Http\\Controllers\\GymController@update")->name("gym.update");
-        Route::delete("/delete/{gymId}", "\\App\\Http\\Controllers\\GymController@delete")->name("gym.delete");
+        Route::delete("/delete/{gymId}", "\\App\\Http\\Controllers\\GymController@delete")->name("gym.delete")->middleware("auth:api");
+    });
+
+    Route::prefix("customer")->group(function () {
+        Route::get("/all", "\\App\\Http\\Controllers\\CustomerController@all")->name("customer.all");
     });
 });
 
-Route::get("/unauthorized", function () {
+Route::match(["get", "put", "delete", "post"], "/unauthorized", function () {
     response()->json([
         "error" => "unauthorized",
     ])->setStatusCode(401)->send();
