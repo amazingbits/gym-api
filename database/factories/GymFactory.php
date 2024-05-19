@@ -18,7 +18,6 @@ class GymFactory extends Factory
     public function definition()
     {
         return [
-            "gym_id" => fake()->uuid(),
             "name" => fake()->company(),
             "city" => fake()->city(),
             "latitude" => fake()->latitude(),

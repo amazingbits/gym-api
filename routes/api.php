@@ -25,8 +25,9 @@ Route::prefix("v1")->group(function () {
         Route::post('me', '\\App\\Http\\Controllers\\AuthController@me');
     });
 
-    Route::prefix("gym")->group(function() {
+    Route::prefix("gym")->group(function () {
         Route::post("/store", "\\App\\Http\\Controllers\\GymController@store")->name("gym.store");
+        Route::put("/update/{gymId}", "\\App\\Http\\Controllers\\GymController@update")->name("gym.update");
     });
 });
 
