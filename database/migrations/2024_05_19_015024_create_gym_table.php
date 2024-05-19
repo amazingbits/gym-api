@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tbl_gym', function (Blueprint $table) {
-            $table->uuid("gym_id")->unique()->primary();
+            $table->id();
             $table->string("name");
             $table->string("city");
             $table->float("latitude");

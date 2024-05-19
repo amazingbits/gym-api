@@ -9,6 +9,5 @@ class Gym extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = "gym_id";
     protected $table = "tbl_gym";
 }

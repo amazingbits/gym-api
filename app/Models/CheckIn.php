@@ -9,6 +9,5 @@ class CheckIn extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = "checkin_id";
     protected $table = "tbl_checkin";
 }
