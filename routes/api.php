@@ -34,6 +34,7 @@ Route::prefix("v1")->group(function () {
 
     Route::prefix("customer")->group(function () {
         Route::get("/all", "\\App\\Http\\Controllers\\CustomerController@all")->name("customer.all");
+        Route::post("/store", "\\App\\Http\\Controllers\\CustomerController@store")->name("customer.store");
     });
 });
 
