@@ -7,7 +7,7 @@ function calculateInMettersDistanceBetweenLatitudeAndLongitude(
     float|int|string $longitude2
 ): float
 {
-    if(
+    if (
         !is_numeric($latitude1) ||
         !is_numeric($latitude2) ||
         !is_numeric($longitude1) ||
@@ -30,4 +30,42 @@ function calculateInMettersDistanceBetweenLatitudeAndLongitude(
     $distance = $distance * 6371;
 
     return (float)number_format($distance * 1000, 2, '.', '');
+}
+
+function validateLatitude(float $latitude): bool
+{
+    $lat_array = explode('.', $latitude);
+
+    if (sizeof($lat_array) != 2) {
+        return false;
+    }
+
+    if (!(is_numeric($lat_array[0]) && $lat_array[0] == round($lat_array[0], 0) && is_numeric($lat_array[1]) && $lat_array[1] == round($lat_array[1], 0))) {
+        return false;
+    }
+
+    if ($latitude >= -90 && $latitude <= 90) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function validateLongitude(float $longitude): bool
+{
+    $long_array = explode('.', $longitude);
+
+    if (sizeof($long_array) != 2) {
+        return false;
+    }
+
+    if (!(is_numeric($long_array[0]) && $long_array[0] == round($long_array[0], 0) && is_numeric($long_array[1]) && $long_array[1] == round($long_array[1], 0))) {
+        return false;
+    }
+
+    if ($longitude >= -180 && $longitude <= 180) {
+        return true;
+    } else {
+        return false;
+    }
 }
