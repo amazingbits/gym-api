@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Gym;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class GymController extends Controller
 {
-    public function store(Request $request): \Illuminate\Http\JsonResponse
+    public function store(): \Illuminate\Http\JsonResponse
     {
         try {
             request()->validate([
@@ -54,7 +53,7 @@ class GymController extends Controller
         ]);
     }
 
-    public function update(Request $request): \Illuminate\Http\JsonResponse
+    public function update(): \Illuminate\Http\JsonResponse
     {
         try {
             request()->validate([
@@ -109,5 +108,26 @@ class GymController extends Controller
         return response()->json([
             "message" => "gym was updated successfully"
         ]);
+    }
+
+    public function delete(): \Illuminate\Http\JsonResponse
+    {
+        $gym = Gym::find((int)request()->gymId);
+        if (empty($gym)) {
+            return response()->json([
+                "error" => "gym not found"
+            ])->setStatusCode(404);
+        }
+
+        try {
+            $gym->delete();
+            return response()->json([
+                "message" => "gym was successfully deleted"
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                "error" => $e->getMessage(),
+            ])->setStatusCode(500);
+        }
     }
 }
