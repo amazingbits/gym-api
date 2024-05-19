@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+
+  localhost:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    ports:
+    - 127.0.0.1:5432:5432
