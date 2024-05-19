@@ -54,4 +54,42 @@ class CustomerController extends Controller
             "message" => "customer was created successfully"
         ]);
     }
+
+    public function update(): \Illuminate\Http\JsonResponse
+    {
+        try {
+            request()->validate([
+                "password" => "required|min:8",
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                "error" => $e->getMessage()
+            ])->setStatusCode(400);
+        }
+
+        try {
+            $customer = Customer::find((int)request()->customerId);
+        } catch (\Exception $e) {
+            $customer = null;
+        }
+
+        if (empty($customer)) {
+            return response()->json([
+                "error" => "customer not found"
+            ])->setStatusCode(404);
+        }
+
+        $customer->password = Hash::make(request()->password);
+        try {
+            $customer->save();
+        } catch (\Exception $e) {
+            return response()->json([
+                "error" => $e->getMessage(),
+            ])->setStatusCode(500);
+        }
+
+        return response()->json([
+            "message" => "customer was updated successfully"
+        ]);
+    }
 }
