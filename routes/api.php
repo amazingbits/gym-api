@@ -36,11 +36,12 @@ Route::prefix("v1")->group(function () {
         Route::get("/all", "\\App\\Http\\Controllers\\CustomerController@all")->name("customer.all");
         Route::post("/store", "\\App\\Http\\Controllers\\CustomerController@store")->name("customer.store");
         Route::put("/update/{customerId}", "\\App\\Http\\Controllers\\CustomerController@update")->name("customer.update");
-        Route::delete("/delete/{customerId}", "\\App\\Http\\Controllers\\CustomerController@delete")->name("customer.delete");
+        Route::delete("/delete/{customerId}", "\\App\\Http\\Controllers\\CustomerController@delete")->name("customer.delete")->middleware("auth:api");
     });
 
     Route::prefix("checkin")->group(function () {
         Route::post("/store", "\\App\\Http\\Controllers\\CheckInController@store")->name("checkin.store");
+        Route::delete("/delete/{checkInId}", "\\App\\Http\\Controllers\\CheckInController@delete")->name("checkin.delete")->middleware("auth:api");
     });
 });
 

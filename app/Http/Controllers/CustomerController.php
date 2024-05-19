@@ -93,7 +93,7 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function delete()
+    public function delete(): \Illuminate\Http\JsonResponse
     {
         $customer = Customer::find((int)request()->customerId);
         if (empty($customer)) {

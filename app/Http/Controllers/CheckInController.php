@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class CheckInController extends Controller
 {
-    public function store()
+    public function store(): \Illuminate\Http\JsonResponse
     {
         try {
             request()->validate([
@@ -91,6 +91,28 @@ class CheckInController extends Controller
 
         return response()->json([
             "message" => "check-in was successfully made"
+        ]);
+    }
+
+    public function delete(): \Illuminate\Http\JsonResponse
+    {
+        $checkin = CheckIn::find((int)request()->checkInId);
+        if (empty($checkin)) {
+            return response()->json([
+                "error" => "check-in not found"
+            ])->setStatusCode(404);
+        }
+
+        try {
+            $checkin->delete();
+        } catch (\Exception $e) {
+            return response()->json([
+                "error" => $e->getMessage()
+            ])->setStatusCode(500);
+        }
+
+        return response()->json([
+            "message" => "check-in was successfully deleted"
         ]);
     }
 }
