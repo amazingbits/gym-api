@@ -38,6 +38,10 @@ Route::prefix("v1")->group(function () {
         Route::put("/update/{customerId}", "\\App\\Http\\Controllers\\CustomerController@update")->name("customer.update");
         Route::delete("/delete/{customerId}", "\\App\\Http\\Controllers\\CustomerController@delete")->name("customer.delete");
     });
+
+    Route::prefix("checkin")->group(function () {
+        Route::post("/store", "\\App\\Http\\Controllers\\CheckInController@store")->name("checkin.store");
+    });
 });
 
 Route::match(["get", "put", "delete", "post"], "/unauthorized", function () {

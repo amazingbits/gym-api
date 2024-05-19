@@ -10,4 +10,5 @@ class CheckIn extends Model
     use HasFactory;
 
     protected $table = "tbl_checkin";
+    protected $fillable = ["customer_id", "gym_id"];
 }
