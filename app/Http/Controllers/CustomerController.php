@@ -92,4 +92,26 @@ class CustomerController extends Controller
             "message" => "customer was updated successfully"
         ]);
     }
+
+    public function delete()
+    {
+        $customer = Customer::find((int)request()->customerId);
+        if (empty($customer)) {
+            return response()->json([
+                "error" => "customer not found"
+            ])->setStatusCode(404);
+        }
+
+        try {
+            $customer->delete();
+        } catch (\Exception $e) {
+            return response()->json([
+                "error" => $e->getMessage()
+            ])->setStatusCode(500);
+        }
+
+        return response()->json([
+            "message" => "customer was successfully deleted"
+        ]);
+    }
 }
