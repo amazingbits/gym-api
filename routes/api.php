@@ -40,6 +40,7 @@ Route::prefix("v1")->group(function () {
     });
 
     Route::prefix("checkin")->group(function () {
+        Route::get("/all/{gymId}/{firstDate}/{secondDate}", "\\App\\Http\\Controllers\\CheckInController@all")->name("checkin.all");
         Route::post("/store", "\\App\\Http\\Controllers\\CheckInController@store")->name("checkin.store");
         Route::delete("/delete/{checkInId}", "\\App\\Http\\Controllers\\CheckInController@delete")->name("checkin.delete")->middleware("auth:api");
     });

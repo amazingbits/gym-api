@@ -6,7 +6,6 @@ use App\Models\CheckIn;
 use App\Models\Customer;
 use App\Models\Gym;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class CheckInController extends Controller
 {
@@ -114,5 +113,36 @@ class CheckInController extends Controller
         return response()->json([
             "message" => "check-in was successfully deleted"
         ]);
+    }
+
+    public function all(): \Illuminate\Http\JsonResponse
+    {
+        $gymId = (int)request()->gymId;
+        $firstDate = request()->firstDate;
+        $secondDate = request()->secondDate;
+
+        try {
+            $firstDate = Carbon::parse($firstDate)->format("Y-m-d");
+        } catch (\Exception $e) {
+            return response()->json([
+                "error" => "first date must be a valid date"
+            ])->setStatusCode(400);
+        }
+
+        try {
+            $secondDate = Carbon::parse($secondDate)->format("Y-m-d");
+        } catch (\Exception $e) {
+            return response()->json([
+                "error" => "second date must be a valid date"
+            ])->setStatusCode(400);
+        }
+
+        $checkins = CheckIn::where(function ($table) use ($gymId, $firstDate, $secondDate) {
+            $table->where("created_at", ">=", $firstDate);
+            $table->where("created_at", "<=", $secondDate);
+            $table->where("gym_id", "=", $gymId);
+        })->get();
+
+        return response()->json($checkins);
     }
 }
