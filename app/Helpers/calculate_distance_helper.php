@@ -1,12 +1,21 @@
 <?php
 
 function calculateInMettersDistanceBetweenLatitudeAndLongitude(
-    float $latitude1,
-    float $longitude1,
-    float $latitude2,
-    float $longitude2
+    float|int|string $latitude1,
+    float|int|string $longitude1,
+    float|int|string $latitude2,
+    float|int|string $longitude2
 ): float
 {
+    if(
+        !is_numeric($latitude1) ||
+        !is_numeric($latitude2) ||
+        !is_numeric($longitude1) ||
+        !is_numeric($longitude2)
+    ) {
+        return 0;
+    }
+
     $latitude1 = deg2rad($latitude1);
     $longitude1 = deg2rad($longitude1);
     $latitude2 = deg2rad($latitude2);
