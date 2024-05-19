@@ -10,4 +10,5 @@ class Gym extends Model
     use HasFactory;
 
     protected $table = "tbl_gym";
+    protected $fillable = ["name", "city", "latitude", "longitude"];
 }
