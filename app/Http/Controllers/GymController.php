@@ -130,4 +130,48 @@ class GymController extends Controller
             ])->setStatusCode(500);
         }
     }
+
+    public function all()
+    {
+        $latitude = request()->latitude;
+        $longitude = request()->longitude;
+
+        if (!is_numeric($latitude) || !is_numeric($longitude)) {
+            return response()->json([
+                "error" => "latitude or longitude is invalid"
+            ]);
+        }
+
+        $latitude = (float)$latitude;
+        $longitude = (float)$longitude;
+
+        if (!validateLatitude($latitude)) {
+            return response()->json([
+                "error" => "latitude is invalid",
+            ])->setStatusCode(400);
+        }
+
+        if (!validateLongitude($longitude)) {
+            return response()->json([
+                "error" => "longitude is invalid",
+            ])->setStatusCode(400);
+        }
+
+        $allGyms = Gym::all();
+        $gyms = [];
+        foreach ($allGyms as $gym) {
+            $gymLatitude = (float)$gym->latitude;
+            $gymLongitude = (float)$gym->longitude;
+            if (calculateInMettersDistanceBetweenLatitudeAndLongitude(
+                    (float)request()->latitude,
+                    (float)request()->longitude,
+                    $gymLatitude,
+                    $gymLongitude
+                ) < (int)getenv("MAX_DISTANCE_IN_KM_GYM_LIST") * 1000) {
+                $gyms[] = $gym;
+            }
+        }
+
+        return response()->json($gyms);
+    }
 }

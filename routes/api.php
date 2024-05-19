@@ -26,6 +26,7 @@ Route::prefix("v1")->group(function () {
     });
 
     Route::prefix("gym")->group(function () {
+        Route::get("/all/{latitude}/{longitude}", "\\App\\Http\\Controllers\\GymController@all")->name("gym.all");
         Route::post("/store", "\\App\\Http\\Controllers\\GymController@store")->name("gym.store");
         Route::put("/update/{gymId}", "\\App\\Http\\Controllers\\GymController@update")->name("gym.update");
         Route::delete("/delete/{gymId}", "\\App\\Http\\Controllers\\GymController@delete")->name("gym.delete");
