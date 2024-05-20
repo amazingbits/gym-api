@@ -1,6 +1,6 @@
 #### Conceitos para trabalhar
 
-- [x] Testes unitários e TDD
+- [x] Testes unitários
 - [x] Docker
 - [x] API REST
 - [x] Git
