@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckIn;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -103,6 +104,7 @@ class CustomerController extends Controller
         }
 
         try {
+            CheckIn::where("customer_id", $customer->id)->delete();
             $customer->delete();
         } catch (\Exception $e) {
             return response()->json([

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckIn;
 use App\Models\Gym;
 use Carbon\Carbon;
 use Illuminate\Validation\ValidationException;
@@ -120,6 +121,7 @@ class GymController extends Controller
         }
 
         try {
+            CheckIn::where("gym_id", $gym->id)->delete();
             $gym->delete();
             return response()->json([
                 "message" => "gym was successfully deleted"
