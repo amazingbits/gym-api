@@ -138,4 +138,46 @@ clientes e check-ins. Também será trabalhado o conceito de localização atrav
 - [x] v1/checkin/store [POST] - rota para registrar um novo check-in
 - [x] v1/checkin/delete/:checkInId - rota para deletar um check-in
 
+#### Instruções de uso
 
+É necessário ter as seguintes ferramentas configuradas no computador:
+
+- [x] PHP (8.0)
+- [x] Composer
+- [x] Docker
+- [x] Git
+
+Primeiramente, clone o repositório através do comando:
+
+```
+git clone https://github.com/amazingbits/gym-api
+```
+
+Em seguida, abra no seu IDE a pasta do projeto. No terminal, digite o seguinte comando para instalar todas as 
+dependências do Laravel:
+
+```
+composer install
+```
+
+Renomeie o arquivo `.env.example` para `.env`.
+
+Em seguida, digite o seguinte comando no terminal para gerar uma chave para a aplicação:
+
+```
+php artisan key:generate
+```
+
+Então, digite o seguinte comando para criar uma chave para a biblioteca do JWT:
+
+```
+php artisan jwt:secret
+```
+
+Agora, digite o seguinte comando para criar um container do docker:
+
+```
+docker-compose up -d
+```
+
+Desta maneira, o projeto está pronto para ser testado.
