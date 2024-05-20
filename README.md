@@ -1,4 +1,5 @@
 #### Conceitos para trabalhar
+
 - [x] Testes unitários e TDD
 - [x] Docker
 - [x] API REST
@@ -113,3 +114,28 @@ clientes e check-ins. Também será trabalhado o conceito de localização atrav
 <div style="text-align: center; width: 100%;">
     <img src="https://i.ibb.co/3NW9CZW/modelo-logico.jpg" alt="Modelo lógico do banco de dados" />
 </div>
+
+#### Rotas
+
+- [x] v1/auth/login [POST] - rota para efetuar o login de usuário e gerar a chave JWT
+- [x] v1/auth/logout [POST] - rota para fazer logout de usuário (requer autenticação)
+- [x] v1/auth/refresh [POST] - rota para gerar um novo token JWT (requer autenticação)
+- [x] v1/auth/me [POST] - rota que retorna as informações do usuário
+
+- [x] v1/gym/all/:latitude/:longitude [GET] - rota para listar todas as academias num raio de 10 quilômetros passando
+  latitude e longitude
+- [x] v1/gym/store [POST] - rota para adicionar uma nova academia
+- [x] v1/gym/update/:gymId [PUT] - rota para alterar as informações de uma academia
+- [x] v1/gym/delete/:gymId [DELETE] - rota para remover uma academia
+
+- [x] v1/customer/all [GET] - rota para listar todos os clientes
+- [x] v1/customer/store [POST] - rota para adicionar um novo cliente
+- [x] v1/customer/update/:customerId [PUT] - rota para alterar as informações de um cliente
+- [x] v1/customer/delete/:customerId [DELETE] - rota para remover um cliente
+
+- [x] v1/checkin/all/:gymId/:firstDate/:secondDate [GET] - rota que retorna todos os check-ins realizados em uma
+  determinada academia num determinado período
+- [x] v1/checkin/store [POST] - rota para registrar um novo check-in
+- [x] v1/checkin/delete/:checkInId - rota para deletar um check-in
+
+
